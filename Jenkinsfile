@@ -1,4 +1,4 @@
 node('workers'){ stage('Checkout'){
-        checkout scm
+        checkout scm 
     }
 }
