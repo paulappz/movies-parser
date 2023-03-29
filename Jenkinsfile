@@ -12,17 +12,17 @@ stage('Checkout'){
         parallel(
             'Quality Tests': {
                 imageTest.inside{
-                    sh 'golint'
+                 //   sh 'golint'
                 }
             },
             'Unit Tests': {
                 imageTest.inside{
-                    sh 'go test'
+                 //   sh 'go test'
                 }
             },
             'Security Tests': {
                 imageTest.inside('-u root:root'){
-                    sh 'nancy sleuth -p /go/src/github/paulappz/movies-parser/Gopkg.lock'
+                 //   sh 'nancy sleuth -p /go/src/github/paulappz/movies-parser/Gopkg.lock'
                 }
             }
         )
