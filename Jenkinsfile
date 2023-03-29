@@ -22,7 +22,7 @@ stage('Checkout'){
             },
             'Security Tests': {
                 imageTest.inside('-u root:root'){
-                    sh 'nancy /go/src/github/paulappz/movies-parser/Gopkg.lock'
+                    sh 'nancy sleuth -p /go/src/github/paulappz/movies-parser/Gopkg.lock'
                 }
             }
         )
