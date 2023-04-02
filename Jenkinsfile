@@ -1,30 +1,36 @@
 def imageName = 'paulappz/movies-parser'
 
-node('workers'){ 
-
-stage('Checkout'){
+node('workers'){
+    stage('Checkout'){
         checkout scm
     }
-    
- def imageTest= docker.build("${imageName}-test", "-f Dockerfile.test .")
+
+    def imageTest= docker.build("${imageName}-test", "-f Dockerfile.test .")
 
     stage('Pre-integration Tests'){
         parallel(
             'Quality Tests': {
                 imageTest.inside{
-                 //   sh 'golint'
+                    sh 'golint'
                 }
             },
             'Unit Tests': {
                 imageTest.inside{
-                 //   sh 'go test'
+                    sh 'go test'
                 }
             },
             'Security Tests': {
                 imageTest.inside('-u root:root'){
-                    sh 'nancy sleuth -p Gopkg.lock'
+                    sh 'nancy /go/src/github/paulappz/movies-parser/Gopkg.lock'
                 }
             }
         )
     }
+}
+
+def commitID() {
+    sh 'git rev-parse HEAD > .git/commitID'
+    def commitID = readFile('.git/commitID').trim()
+    sh 'rm .git/commitID'
+    commitID
 }
