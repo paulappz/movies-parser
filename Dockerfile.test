@@ -9,8 +9,6 @@ RUN wget https://github.com/sonatype-nexus-community/nancy/releases/download/$VE
 
 RUN go mod init
 
-RUN go mod tidy
-
 RUN go get -u golang.org/x/lint/golint
 
 COPY . .
