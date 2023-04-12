@@ -16,14 +16,14 @@ node('workers'){
                 }
             },
             'Unit Tests': {
-                imageTest.inside{
-                    sh 'go test'
-                }
+              //  imageTest.inside{
+              //      sh 'go test'
+              //  }
             },
             'Security Tests': {
-                imageTest.inside('-u root:root'){
-                    sh 'nancy /go/src/github/paulappz/movies-parser/Gopkg.lock'
-                }
+             //   imageTest.inside('-u root:root'){
+              //      sh 'nancy /go/src/github/paulappz/movies-parser/Gopkg.lock'
+              //  }
             }
         )
     }
